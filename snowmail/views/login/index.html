@@ -1,0 +1,54 @@
+{% block content %}
+{% from '_macros.html' import input %}
+ <style type "text/css">
+    *, html {
+      padding:0;
+      margin:0;
+      font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+
+    }
+body {
+      margin:250px 0px; padding:0px;
+      text-align:center;
+      background-color:#a5a5a5;
+    }
+
+     .box {
+ 
+
+        background-color:#f0f0f0;
+        color:#a5a5a5;
+        font-weight:bold;
+        width:650px;
+        height:125px;
+        margin:0px auto;
+        text-align:left;
+        padding:15px;
+
+
+        box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.99);
+        -moz-box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.99);
+        -webkit-box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.99);
+        border: 1px solid black;
+}
+
+</style>
+
+<div class="box">
+
+
+
+    <form action="" method="post">
+    <dl>
+    <dt>Email</dt>
+    <dd>{{ input('email') }}</dd>
+    <dt>Password</dt>
+    <dd>{{ input('password', type='password') }}</dd>
+    <br/>
+    <dd><input type="submit" value="Login"></dd>
+</dl> 
+
+    </form>
+    </div>
+
+    {% endblock %}
