@@ -9,7 +9,6 @@ import threading
 class SMTPReceiver(smtpd.SMTPServer):
 
 
-
     def process_message(self, peer, mailfrom, rcpttos, data):
         # with open('message.txt', 'a') as txt_file:
         #     txt_file.write('Hello\n')
