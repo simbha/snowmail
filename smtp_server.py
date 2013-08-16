@@ -3,21 +3,26 @@ import asyncore
 import email.utils
 from email.mime.text import MIMEText
 import threading
+from snowmail.encrypt import Crypter
 
-
-#password = 
+#key = 
 class SMTPReceiver(smtpd.SMTPServer):
 
-
     def process_message(self, peer, mailfrom, rcpttos, data):
-        # with open('message.txt', 'a') as txt_file:
-        #     txt_file.write('Hello\n')
-        header = [
+        print peer
+        header = '\n'.join([
             'Receiving message from:{0}'.format(peer), 
             'Message addressed from:{0}'.format(mailfrom),
             'Message addressed to  :{0}'.format(rcpttos),
             'Message length        :{0}'.format(len(data))
-        ]
+        ])
+        cr = Crypter('934a26c6ec10c1c44e1e140c6ffa25036166c0afd0efcfe638693e6a')
+        encrypted_header = cr.encrypt(header)
+        encrypted_data = cr.encrypt(data)
+        with open('test.txt', 'a') as txt_file:
+            txt_file.write(encrypted_header)
+            txt_file.write(encrypted_data)
+
         # print data
 
         # def send_response():
