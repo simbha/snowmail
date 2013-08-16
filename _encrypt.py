@@ -2,12 +2,13 @@ from Crypto.Cipher import AES
 from Crypto import Random
 import binascii
 import os
+import hashlib
 
 
 class Crypter(object):
 
     def __init__(self, key):
-        self.key = key
+        self.key = hashlib.md5(key).digest()
         self.iv = '\x00'*16
 
     def encrypt(self, txt_str):
@@ -23,7 +24,8 @@ class Crypter(object):
 
 
 def generate_key(log=True):
-    key = os.urandom(16)
+    key = hashlib.sha224("testkey").hexdigest()
+    print key
     if log:
         print("This is your secret key.  / ! \ IMPORTANT / ! \: do not lose/forget it!")
         print(key)
@@ -44,6 +46,3 @@ if __name__ == "__main__":
     test_key = generate_key(log=False)
     cr = Crypter(test_key)
     test(cr)
-
-        
-#test()
