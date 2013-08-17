@@ -5,8 +5,11 @@ from email.mime.text import MIMEText
 import threading
 from snowmail.encrypt import Crypter
 
-#key = 
+
 class SMTPReceiver(smtpd.SMTPServer):
+
+    def __init__(self, secret_key):
+        self.secret_key = secret_key
 
     def process_message(self, peer, mailfrom, rcpttos, data):
         print peer
@@ -23,28 +26,6 @@ class SMTPReceiver(smtpd.SMTPServer):
             txt_file.write(encrypted_header)
             txt_file.write(encrypted_data)
 
-        # print data
-
-        # def send_response():
-        #     msg = MIMEText('Hello world!')
-        #     msg['To'] = email.utils.formataddr(('Recipient', mailfrom))
-        #     msg['From'] = email.utils.formataddr(('Author', 'name@example.org'))
-        #     msg['Subject'] = ''
-
-        #     print 'Connecting to mail server'
-        #     server = smtplib.SMTP()
-        #     server.set_debuglevel(1)
-        #     server.connect()
-        #     print 'Attempting to send message'
-        #     try:
-        #         server.sendmail('name@example.org', [mailfrom], msg.as_strtring())
-        #     except Exception, ex:
-        #         print 'Could not send mail', ex
-        #     finally:
-        #         server.quit()
-        #     print 'Finished sending message'
-        # threading.Thread(target=send_response).start()
-        # return
 
 def main():
     server = SMTPReceiver(('', 25), None)
